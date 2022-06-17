@@ -42,6 +42,9 @@ run
 /*/run/
 /*/ServerRun/
 /*/src--/
+*.bat
+*.gradle
+gradlew
 
 # Package Files #
 *.jar
@@ -51,6 +54,9 @@ run
 *.zip
 *.tar.gz
 *.rar
+
+#minecraft models#
+*.bbmodel
 
 # Files from Forge MDK
 forge*changelog.txt

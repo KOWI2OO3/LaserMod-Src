@@ -29,7 +29,6 @@ import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ColorHandlerEvent;
-import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -58,7 +57,7 @@ public class ModItems {
 	
 	public static final RegistryObject<Item> LaserHelmet = register("laser_helmet", () -> new ItemLaserArmorBase(new LaserArmorMaterial(), EquipmentSlot.HEAD, new Item.Properties().tab(MainMod.blocks)));
 	public static final RegistryObject<Item> LaserChestplate = register("laser_chestplate", () -> new ItemLaserArmorBase(new LaserArmorMaterial(), EquipmentSlot.CHEST, new Item.Properties().tab(MainMod.blocks)));
-//	public static final RegistryObject<Item> LaserHelmet = register("laser_helmet", () -> new ItemLaserArmorBase(ArmorMaterials.IRON, EquipmentSlot.HEAD, new Item.Properties().tab(MainMod.blocks)));
+	public static final RegistryObject<Item> LaserLeggings = register("laser_leggings", () -> new ItemLaserArmorBase(new LaserArmorMaterial(), EquipmentSlot.LEGS, new Item.Properties().tab(MainMod.blocks)));
 	
 	public static final RegistryObject<Item> IR_Glasses = register("ir_glasses", () -> new ItemIRGlasses());
 	public static final RegistryObject<Item> Linker = register("linker", () -> new ItemLinker());
@@ -112,7 +111,11 @@ public class ModItems {
 					new ResourceLocation(Reference.MODID, "active"), (stack, world, living, id) -> {
 					return LaserItemUtils.isExtended(stack) ? 1.0F : 0.0F;
 				});
-	  	  ItemProperties.register(ModItems.LaserChestplate.get(), 
+	  	  	ItemProperties.register(ModItems.LaserChestplate.get(), 
+					new ResourceLocation(Reference.MODID, "active"), (stack, world, living, id) -> {
+					return LaserItemUtils.isExtended(stack) ? 1.0F : 0.0F;
+				});
+		  	ItemProperties.register(ModItems.LaserLeggings.get(), 
 					new ResourceLocation(Reference.MODID, "active"), (stack, world, living, id) -> {
 					return LaserItemUtils.isExtended(stack) ? 1.0F : 0.0F;
 				});
@@ -130,10 +133,6 @@ public class ModItems {
 				ModItems.LaserPickaxe.get(), ModItems.LaserSword.get(), ModItems.LaserHoe.get(), ModItems.LaserAxe.get(), ModItems.LaserShovel.get(),
 				ModItems.LaserToolOpened.get(),
 				ModItems.LaserToolShell.get(),
-				ModItems.LaserHelmet.get(), ModItems.LaserChestplate.get());
-	}
-	
-	public static void registerArmorRenderers(final EntityRenderersEvent.AddLayers event) {
-		
+				ModItems.LaserHelmet.get(), ModItems.LaserChestplate.get(), ModItems.LaserLeggings.get());
 	}
 }

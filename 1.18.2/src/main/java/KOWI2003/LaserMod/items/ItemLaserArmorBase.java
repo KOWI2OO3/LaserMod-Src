@@ -11,6 +11,7 @@ import com.google.common.collect.ImmutableMultimap.Builder;
 import com.google.common.collect.Multimap;
 
 import KOWI2003.LaserMod.LaserProperties;
+import KOWI2003.LaserMod.Reference;
 import KOWI2003.LaserMod.init.ModKeybindings;
 import KOWI2003.LaserMod.items.interfaces.IChargable;
 import KOWI2003.LaserMod.items.interfaces.IExtendable;
@@ -135,6 +136,7 @@ public class ItemLaserArmorBase extends ArmorItem implements ILaserUpgradable, I
 
 	public ArmorMaterial getMaterial() {
 		return ArmorMaterials.IRON;
+//		return material;
 	}
 	
 	public EquipmentSlot getSlot() {
@@ -148,7 +150,7 @@ public class ItemLaserArmorBase extends ArmorItem implements ILaserUpgradable, I
 	
 	@Override
 	public int getEnchantmentValue() {
-		return 0;
+		return -1;
 	}
 	
 	@Override
@@ -167,6 +169,16 @@ public class ItemLaserArmorBase extends ArmorItem implements ILaserUpgradable, I
 	@Nullable
 	public SoundEvent getEquipSound() {
 		return this.material.getEquipSound();
+	}
+	
+	@Override
+	public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
+		return false;
+	}
+	
+	@Override
+	public boolean isEnchantable(ItemStack stack) {
+		return false;
 	}
 	
 	@Override
@@ -342,7 +354,7 @@ public class ItemLaserArmorBase extends ArmorItem implements ILaserUpgradable, I
 		@Override
 		public Ingredient getRepairIngredient() { return null; }
 		@Override
-		public String getName() { return name; }
+		public String getName() { return Reference.MODID + ":" + name; }
 		@Override
 		public float getToughness() { return toughness; }
 		@Override

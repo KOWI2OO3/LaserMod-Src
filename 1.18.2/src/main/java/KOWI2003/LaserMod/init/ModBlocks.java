@@ -26,7 +26,6 @@ import net.minecraft.world.level.material.Material;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ColorHandlerEvent;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -40,7 +39,6 @@ public class ModBlocks {
 	public static final LinkedList<RegistryObject<Block>> tabBlocks = new LinkedList<>();
 	
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Reference.MODID);
-//	public static final DeferredRegister<Item> BLOCK_ITEM = DeferredRegister.create(ForgeRegistries.ITEMS, Reference.MODID);
 	
 	public static RegistryObject<Block> Laser = register("laser", () -> new BlockLaser(Material.STONE));
 	public static RegistryObject<Block> LaserCatcher = register("laser_catcher", () -> new BlockLaserCatcher());
@@ -84,58 +82,10 @@ public class ModBlocks {
 		return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().tab(tab)));
 	}
 	
-//	private static Block registerHidden(String name, final Supplier<? extends Block> block) {
-//    	
-//    }
-	
-//	private static Block registerHidden(String name, Block block) {
-//    	return register(name, block, new Item.Properties());
-//    }
-//	
-//    private static Block register(String name, Block block) { 	
-//    	return register(name, block, new Item.Properties().tab(MainMod.blocks));
-//    }
-//    
-//    private static Block register(String name, Block block, Item.Properties properties) {
-//    	return register(name, block, new BlockItem(block, properties));
-//    }
-//    
-//	private static Block register(String name, Block block, BlockItem item) {
-//		return register(name, block, block1 -> item);
-//	}
-//    
-//	private static Block register(String name, Block block, Function<Block, BlockItem> function) {
-//		block.setRegistryName(new ResourceLocation(Reference.MODID, name));
-//		BLOCKS.add(block);
-//		if(block.getRegistryName() != null) {
-//			Item item = function.apply(block);
-//			if(item != null) {
-//				item.setRegistryName(new ResourceLocation(Reference.MODID, name));
-//				if(item.getCreativeTabs().contains(MainMod.blocks))
-//					ModItems.tabStacks.add(item.getDefaultInstance());
-//				ITEMS.add(item);
-//			}
-//		}
-//		return block;
-//	}
-	
 	public static void register(IEventBus bus) {
 		BLOCKS.register(bus);
 	}
-	
-	@SubscribeEvent
-	public static void registerBlocks(final RegistryEvent.Register<Block> event) {
-//		ModChecker.check();
-//		BLOCKS.forEach(block -> event.getRegistry().register(block));
-//		BLOCKS.clear();
-	}
-//	
-//	@SubscribeEvent
-//	public static void registerItems(final RegistryEvent.Register<Item> event) {
-//		ITEMS.forEach(item -> event.getRegistry().register(item));
-//		ITEMS.clear();
-//	}
-//	
+
 	@SubscribeEvent
 	@OnlyIn(Dist.CLIENT)
 	public static void registerBlockColors(final ColorHandlerEvent.Block event){

@@ -49,10 +49,12 @@ public class LaserArmorModel<T extends LivingEntity> extends HumanoidModel<T> {
 	
 
 	public boolean LeggingsVisible = true;
+	public boolean LeggingsActive = false;
 	private ModelPart LeggingsBase;
 	private ModelPart LeggingsGem;
-	public ModelPart LeggingsActive;
-	
+	private ModelPart LeggingsActiveLeft;
+	private ModelPart LeggingsActiveRight;
+	private ModelPart LeggingsActiveTop;
 
 	public boolean BootsVisible = true;
 	private ModelPart BootsBase;
@@ -67,6 +69,7 @@ public class LaserArmorModel<T extends LivingEntity> extends HumanoidModel<T> {
 		this.HelmetGem = root.getChild("HelmetGem");
 		this.HelmetActive = root.getChild("HelmetActive");
 		this.HelmetActiveAirtight = root.getChild("HelmetActiveAirtight");
+		
 		this.ChestBase = root.getChild("ChestBase");
 		this.ChestRightArm = root.getChild("ChestArmRight");
 		this.ChestLeftArm = root.getChild("ChestArmLeft");
@@ -74,6 +77,12 @@ public class LaserArmorModel<T extends LivingEntity> extends HumanoidModel<T> {
 		this.ChestActive = root.getChild("ChestplateActive");
 		this.ChestActiveRightArm = root.getChild("ChestplateActiveRightArm");
 		this.ChestActiveLeftArm = root.getChild("ChestplateActiveLeftArm");
+		
+		this.LeggingsBase = root.getChild("LeggingsBase");
+		this.LeggingsGem = root.getChild("LeggingsGem");
+		this.LeggingsActiveLeft = root.getChild("LeggingsActiveLeft");
+		this.LeggingsActiveRight = root.getChild("LeggingsActiveRight");
+		this.LeggingsActiveTop = root.getChild("LeggingsActiveTop");
 	}
 	
 	public LaserArmorModel(ModelPart root) {
@@ -101,6 +110,7 @@ public class LaserArmorModel<T extends LivingEntity> extends HumanoidModel<T> {
 
 		partdefinition = createHelmetLayer(partdefinition);
 		partdefinition = createChestplateLayer(partdefinition);
+		partdefinition = createLeggingsLayer(partdefinition);
 		
 		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
@@ -273,6 +283,49 @@ public class LaserArmorModel<T extends LivingEntity> extends HumanoidModel<T> {
 		return partdefinition;
 	}
 
+	private static PartDefinition createLeggingsLayer(PartDefinition partdefinition) {
+		PartDefinition LeggingsBase = partdefinition.addOrReplaceChild("LeggingsBase", CubeListBuilder.create()
+				.texOffs(0, 0).addBox(-4.25F, -12.475F+24.0F, -2.25F, 8.5F, 0.5F, 4.5F, new CubeDeformation(0.0F))
+		.texOffs(49, 50).addBox(-0.4F, -12.525F+24.0F, -2.4F, 0.8F, 0.6F, 0.45F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+
+		PartDefinition RightLeg = LeggingsBase.addOrReplaceChild("RightLeg", CubeListBuilder.create()
+				.texOffs(49, 53).addBox(-4.275F, -12.275F+24.0F, -0.25F, 0.275F, 0.55F, 0.25F, new CubeDeformation(0.0F))
+		.texOffs(0, 0).addBox(-4.325F, -11.725F+24.0F, -0.75F, 0.325F, 1.75F, 1.25F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+		PartDefinition RL_Details = RightLeg.addOrReplaceChild("RL_Details", CubeListBuilder.create()
+				.texOffs(44, 44).addBox(-4.375F, -11.425F+24.0F, -0.55F, 0.325F, 0.85F, 0.85F, new CubeDeformation(0.0F))
+		.texOffs(8, 44).addBox(-4.375F, -10.325F+24.0F, -0.6F, 0.325F, 0.15F, 0.15F, new CubeDeformation(0.0F))
+		.texOffs(8, 44).addBox(-4.375F, -10.325F+24.0F, -0.35F, 0.325F, 0.15F, 0.15F, new CubeDeformation(0.0F))
+		.texOffs(8, 44).addBox(-4.375F, -10.325F+24.0F, -0.1F, 0.325F, 0.15F, 0.15F, new CubeDeformation(0.0F))
+		.texOffs(8, 44).addBox(-4.375F, -10.325F+24.0F, 0.15F, 0.325F, 0.15F, 0.15F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+		PartDefinition LeftLeg = LeggingsBase.addOrReplaceChild("LeftLeg", CubeListBuilder.create()
+				.texOffs(0, 0).addBox(-4.325F, -11.725F+24.0F, -0.75F, 0.325F, 1.75F, 1.25F, new CubeDeformation(0.0F))
+		.texOffs(49, 53).addBox(-4.275F, -12.275F+24.0F, -0.25F, 0.275F, 0.55F, 0.25F, new CubeDeformation(0.0F)), PartPose.offset(8.3F, 0.0F, 0.0F));
+
+		PartDefinition LL_Details = LeftLeg.addOrReplaceChild("LL_Details", CubeListBuilder.create()
+				.texOffs(44, 44).addBox(-4.375F, -11.425F+24.0F, -0.55F, 0.325F, 0.85F, 0.85F, new CubeDeformation(0.0F))
+		.texOffs(8, 44).addBox(-4.375F, -10.325F+24.0F, -0.6F, 0.325F, 0.15F, 0.15F, new CubeDeformation(0.0F))
+		.texOffs(8, 44).addBox(-4.375F, -10.325F+24.0F, -0.35F, 0.325F, 0.15F, 0.15F, new CubeDeformation(0.0F))
+		.texOffs(8, 44).addBox(-4.375F, -10.325F+24.0F, -0.1F, 0.325F, 0.15F, 0.15F, new CubeDeformation(0.0F))
+		.texOffs(8, 44).addBox(-4.375F, -10.325F+24.0F, 0.15F, 0.325F, 0.15F, 0.15F, new CubeDeformation(0.0F)), PartPose.offset(0.125F, 0.0F, 0.0F));
+
+		PartDefinition LeggingsGem = partdefinition.addOrReplaceChild("LeggingsGem", CubeListBuilder.create()
+				.texOffs(48, 19).addBox(4.075F, -11.35F+24.0F, -0.475F, 0.35F, 0.7F, 0.7F, new CubeDeformation(0.0F))
+		.texOffs(48, 19).addBox(-4.4F, -11.35F+24.0F, -0.475F, 0.35F, 0.7F, 0.7F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+		
+		PartDefinition LeggingsActiveRight = partdefinition.addOrReplaceChild("LeggingsActiveRight", CubeListBuilder.create().texOffs(16, 48).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.7F))
+				, PartPose.offset(-1.9F, -12.0F, 0.0F));
+		
+		PartDefinition LeggingsActiveLeft = partdefinition.addOrReplaceChild("LeggingsActiveLeft", CubeListBuilder.create()
+				.texOffs(16, 48).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.7F)), PartPose.offset(1.9F, -12.0F, 0.0F));
+		
+		PartDefinition LeggingsActiveTop = partdefinition.addOrReplaceChild("LeggingsActiveTop", CubeListBuilder.create()
+				.texOffs(16, 16).addBox(-4, 0, -2, 8, 12, 4, new CubeDeformation(0.7f)), PartPose.offset(0.0F, 0.0F, 0.0F));
+		
+		return partdefinition;
+	}
+	
 	@Override
 	public void renderToBuffer(PoseStack matrix, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
 
@@ -286,9 +339,11 @@ public class LaserArmorModel<T extends LivingEntity> extends HumanoidModel<T> {
 			renderHelmet(matrix, packedLight, packedOverlay, red, green, blue, alpha, cred, cgreen, cblue, calpha);
 		if(ChestVisible)
 			renderChestplate(matrix, packedLight, packedOverlay, red, green, blue, alpha, cred, cgreen, cblue, calpha);
+		if(LeggingsVisible)
+			renderLeggings(matrix, packedLight, packedOverlay, red, green, blue, alpha, cred, cgreen, cblue, calpha);
 	}
 	
-	public void renderHelmet(PoseStack matrix, int packedLight, int packedOverlay, float red, float green, float blue, float alpha, float cred, float cgreen, float cblue, float calpha) {
+	private void renderHelmet(PoseStack matrix, int packedLight, int packedOverlay, float red, float green, float blue, float alpha, float cred, float cgreen, float cblue, float calpha) {
 		var texture = new ResourceLocation(Reference.MODID, "textures/models/armor/laser_armor.png");
 		RenderType renderType = RenderType.entityTranslucent(texture);
 		VertexConsumer buffer = Minecraft.getInstance().renderBuffers().bufferSource().getBuffer(renderType);
@@ -316,7 +371,7 @@ public class LaserArmorModel<T extends LivingEntity> extends HumanoidModel<T> {
 		}
 	}
 	
-	public void renderChestplate(PoseStack matrix, int packedLight, int packedOverlay, float red, float green, float blue, float alpha, float cred, float cgreen, float cblue, float calpha) {
+	private void renderChestplate(PoseStack matrix, int packedLight, int packedOverlay, float red, float green, float blue, float alpha, float cred, float cgreen, float cblue, float calpha) {
 		var texture = new ResourceLocation(Reference.MODID, "textures/models/armor/laser_armor.png");
 		RenderType renderType = RenderType.entityTranslucent(texture);
 		VertexConsumer buffer = Minecraft.getInstance().renderBuffers().bufferSource().getBuffer(renderType);
@@ -343,6 +398,32 @@ public class LaserArmorModel<T extends LivingEntity> extends HumanoidModel<T> {
 			ChestActiveRightArm.render(matrix, buffer, packedLight, packedOverlay, cred, cgreen, cblue, .6f);
 		}
 
+	}
+	
+	private void renderLeggings(PoseStack matrix, int packedLight, int packedOverlay, float red, float green, float blue, float alpha, float cred, float cgreen, float cblue, float calpha)
+	{
+		var texture = new ResourceLocation(Reference.MODID, "textures/models/armor/laser_armor.png");
+		RenderType renderType = RenderType.entityTranslucent(texture);
+		VertexConsumer buffer = Minecraft.getInstance().renderBuffers().bufferSource().getBuffer(renderType);
+		
+		LeggingsBase.loadPose(body.storePose());
+		LeggingsGem.loadPose(body.storePose());
+		
+		LeggingsBase.render(matrix, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+		LeggingsGem.render(matrix, buffer, packedLight, packedOverlay, cred, cgreen, cblue, calpha);
+		
+		texture = new ResourceLocation(Reference.MODID, "textures/models/armor/laser_armor_overlay_2.png");
+		renderType = RenderType.entityTranslucent(texture);
+		buffer = Minecraft.getInstance().renderBuffers().bufferSource().getBuffer(renderType);
+		
+		if(LeggingsActive) {
+			LeggingsActiveLeft.loadPose(leftLeg.storePose());
+			LeggingsActiveRight.loadPose(rightLeg.storePose());
+			LeggingsActiveTop.loadPose(body.storePose());
+			LeggingsActiveLeft.render(matrix, buffer, packedLight, packedOverlay, cred, cgreen, cblue, .6f);
+			LeggingsActiveRight.render(matrix, buffer, packedLight, packedOverlay, cred, cgreen, cblue, .6f);
+			LeggingsActiveTop.render(matrix, buffer, packedLight, packedOverlay, cred, cgreen, cblue, .6f);
+		}
 	}
 	
 	boolean hasAirtightSeal() {

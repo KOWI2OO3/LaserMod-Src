@@ -24,6 +24,7 @@ public class InfuserRecipeMaker {
 		recipes.add(contructToolRecipe(ModItems.LaserShovel));
 		recipes.add(contructToolRecipe(ModItems.LaserHoe));
 		recipes.add(contructToolRecipe(ModItems.LaserHelmet));
+		recipes.add(contructToolRecipe(ModItems.LaserChestplate));
 		
 		return recipes;
 	}

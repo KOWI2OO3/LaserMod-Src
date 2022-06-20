@@ -159,6 +159,16 @@ public class ItemLaserArmorBase extends ArmorItem implements ILaserUpgradable, I
 	}
 	
 	@Override
+	public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
+		return false;
+	}
+	
+	@Override
+	public boolean isEnchantable(ItemStack stack) {
+		return false;
+	}
+	
+	@Override
 	public ItemStack getDefaultInstance() {
 		ItemStack stack = new ItemStack(this);
 		stack = setExtended(stack, false);

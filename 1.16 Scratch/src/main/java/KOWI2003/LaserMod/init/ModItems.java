@@ -50,6 +50,7 @@ public class ModItems {
 	public static final Item LaserHoe = registerItem("laser_hoe", new ToolLaserHoe(new Item.Properties().tab(MainMod.blocks), 8f, 6f, 1000));
 	
 	public static final Item LaserHelmet = registerItem("laser_helmet", new ItemLaserArmorBase(new LaserArmorMaterial(), EquipmentSlotType.HEAD, new Item.Properties().tab(MainMod.blocks)));
+	public static final Item LaserChestplate = registerItem("laser_chestplate", new ItemLaserArmorBase(new LaserArmorMaterial(), EquipmentSlotType.CHEST, new Item.Properties().tab(MainMod.blocks)));
 	
 	public static final Item IR_Glasses = registerItem("ir_glasses", new ItemIRGlasses());
 	public static final Item Linker = registerItem("linker", new ItemLinker());
@@ -112,12 +113,16 @@ public class ModItems {
 				      new ResourceLocation(Reference.MODID, "active"), (stack, world, living) -> {
 				        return LaserItemUtils.isExtended(stack) ? 1.0F : 0.0F;
 				      });
+			ItemModelsProperties.register(ModItems.LaserChestplate, 
+				      new ResourceLocation(Reference.MODID, "active"), (stack, world, living) -> {
+				        return LaserItemUtils.isExtended(stack) ? 1.0F : 0.0F;
+				      });
   	  	});
 	}
 	@SubscribeEvent
 	@OnlyIn(Dist.CLIENT)
 	public static void registerBlockColors(ColorHandlerEvent.Item event){
 		event.getItemColors().register(new ColorHandler.Item(), ModItems.LaserPickaxe, ModItems.LaserSword, ModItems.LaserHoe, 
-				ModItems.LaserAxe, ModItems.LaserShovel, ModItems.LaserToolOpened, ModItems.LaserToolShell, ModItems.LaserHelmet);
+				ModItems.LaserAxe, ModItems.LaserShovel, ModItems.LaserToolOpened, ModItems.LaserToolShell, ModItems.LaserHelmet, ModItems.LaserChestplate);
 	}
 }

@@ -20,6 +20,9 @@ public class LaserArmorModelHandler {
 		model.HelmetVisible = slot == EquipmentSlotType.HEAD;
 		model.HelmetActive.visible = slot == EquipmentSlotType.HEAD && isActive;
 		
+		model.ChestplateVisible = slot == EquipmentSlotType.CHEST;
+		model.ChestActive.visible = slot == EquipmentSlotType.CHEST && isActive;
+		
 		_default.copyPropertiesTo(model);
 		return model;
 	}
